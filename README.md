@@ -1,2 +1,2 @@
 # S
-expressions in languages
+expressions (*.S) and operators (*.s) by usage in various projects
