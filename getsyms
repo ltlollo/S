@@ -5,7 +5,8 @@
 #                 (default: .)
 #   ext<string...>: list of extensions
 #                   (default: c cc cpp cxx h hpp rs hs go py sh)
-#SCOPE: gather expressions and operator sequences around project
+#SCOPE: gather expressions and operator sequences around a project
+#       as Ssy.S and Ssy.s
 
 path="${1-.}"
 [[ $2 ]] && langs=${@:2} || langs="c cc cpp cxx h hpp rs hs go py sh"
