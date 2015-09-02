@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#USAGE: getsyms [PATH] [EXT...]
+#   path<string>: accumulate operators of the project located in $PWD into path
+#                 (default: .)
+#   ext<string...>: list of extensions
+#                   (default: c cc cpp cxx h hpp rs hs go py sh)
+#SCOPE: gather expressions and operator sequences around project
+
+path="${1-.}"
+[[ $2 ]] && langs=${@:2} || langs="c cc cpp cxx h hpp rs hs go py sh"
+
+gsy="$path/Ssyms.g"
+sy="$path/Ssy"
+
+collect_from() {
+for i; do
+    while read f; do sed -re 's/(\w|\s|\t)+/S/g' "$f" >> "$gsy"
+    done< <(find . -name "*.$i")
+done
+}
+echo "[I]: collecting $langs in $path" 2>&1
+collect_from $langs
+cat "$gsy" | tr -d '\r'               | sort | uniq -c | sort -rn > "$sy".S
+cat "$gsy" | tr -d '\r' |tr 'S' '\n'  | sort | uniq -c | sort -rn > "$sy".s
