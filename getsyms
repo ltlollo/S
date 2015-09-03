@@ -24,5 +24,5 @@ collect_from() {
 
 echo "[I]: collecting $langs in $path" 2>&1
 collect_from $langs
-cat "$gsy" | tr -d '\r'               | sort | uniq -c | sort -rn > "$sy".S
-cat "$gsy" | tr -d '\r' |tr 'S' '\n'  | sort | uniq -c | sort -rn > "$sy".s
+cat "$gsy"               | sort | uniq -c | sort -rn > "$sy".S
+cat "$gsy" | tr 'S' '\n' | sort | uniq -c | sort -rn > "$sy".s
